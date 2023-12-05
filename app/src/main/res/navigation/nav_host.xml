@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nav_host"
+        app:startDestination="@id/recipeLocaleFragment">
+
+    <fragment
+            android:id="@+id/recipeLocaleFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeLocaleFragment"
+            android:label="RecipeLocaleFragment" />
+    <fragment
+            android:id="@+id/categoriesFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.CategoriesFragment"
+            android:label="CategoriesFragment" />
+    <fragment
+            android:id="@+id/ingredientsFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.IngredientsFragment"
+            android:label="IngredientsFragment" />
+    <fragment
+            android:id="@+id/tagsFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.TagsFragment"
+            android:label="TagsFragment" />
+    <fragment
+            android:id="@+id/recipeOnlineFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeOnlineFragment"
+            android:label="RecipeOnlineFragment" />
+</navigation>
