@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import de.jnmultimedia.a3_android_abschlussprojekt.adapter.CategoryAdapter
+import de.jnmultimedia.a3_android_abschlussprojekt.adapter.RecipeAdapter
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentCategoriesBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentRecipesOnlineBinding
 
-class CategoriesFragment: Fragment() {
+class RecipesOnlineFragment: Fragment() {
 
-    private lateinit var binding: FragmentCategoriesBinding
+    private lateinit var binding: FragmentRecipesOnlineBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -20,23 +20,19 @@ class CategoriesFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCategoriesBinding.inflate(layoutInflater)
+        binding = FragmentRecipesOnlineBinding.inflate(layoutInflater)
+        viewModel.getAllRecipesFromApi()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CategoryAdapter(listOf(), viewModel)
-        binding.rvCategories.adapter = adapter
+        val adapter = RecipeAdapter(listOf(), viewModel)
+        binding.rvRecipes.adapter = adapter
 
-        viewModel.categories.observe(viewLifecycleOwner) {
+        viewModel.recipesOnline.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-        }
-
-        binding.floatingActionButton.setOnClickListener {
-            viewModel.wipeAllIngredientItems()
-            //findNavController().navigate(R.id.categoryNewFragment)
         }
     }
 }

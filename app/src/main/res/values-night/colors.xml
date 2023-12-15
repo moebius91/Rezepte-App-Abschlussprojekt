@@ -1,0 +1,24 @@
+<resources>
+    <color name="primaryColor">#FF4CAF50</color> <!-- Grün -->
+    <color name="primaryColorDark">#FF388E3C</color> <!-- Dunkleres Grün -->
+    <color name="primaryColorVariant">#FF81C784</color> <!-- Helleres Grün -->
+    <color name="primaryColorContainer">#FF81C784</color> <!-- Helleres Grün -->
+    <color name="colorOnPrimary">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+    <color name="colorOnPrimaryContainer">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+
+    <color name="secondaryColor">#FF673AB7</color> <!-- Dunkellila -->
+    <color name="secondaryColorVariant">#FF9575CD</color> <!-- Helleres Lila -->
+    <color name="colorOnSecondary">#FFFFFFFF</color> <!-- Weißer Text auf Dunkellila -->
+
+    <color name="tertiaryColor">#FF455A64</color> <!-- Dunkelgrau -->
+    <color name="colorOnTertiary">#FFFFFFFF</color> <!-- Weißer Text auf Dunkelgrau -->
+
+    <color name="accentColor">#FFFF4081</color> <!-- Pink -->
+    <color name="colorOnAccent">#FFFFFFFF</color> <!-- Weißer Text auf Pink -->
+
+    <color name="colorOnBackground">#FFFFFFFF</color> <!-- Weißer Text auf Dunklem Grau -->
+
+    <color name="colorSurface">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+    <color name="colorOnSurface">#FFFFFFFF</color> <!-- Weißer Text auf Dunklerem Grau -->
+    <color name="colorOnSurfaceInverse">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+</resources>

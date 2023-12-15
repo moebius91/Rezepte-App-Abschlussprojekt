@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btn_recipe_edit_save"
+            android:layout_marginBottom="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="Neues Rezept:"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_recipe_edit_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp" />
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/ett_recipe_edit_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recipe_edit_title"
+                    android:layout_marginTop="16dp"
+                    android:hint="Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp" />
+
+            <Button
+                    android:text="Neue Zutat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_recipe_edit_new_ingredient"
+                    app:layout_constraintTop_toBottomOf="@+id/ett_recipe_edit_name"
+                    app:layout_constraintStart_toStartOf="@+id/ett_recipe_edit_name"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/rv_recipe_edit_ingredients"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_recipe_edit_new_ingredient"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_ingredient" />
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/ett_recipe_edit_description"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_recipe_edit_ingredients"
+                    app:layout_constraintStart_toStartOf="@+id/rv_recipe_edit_ingredients"
+                    app:layout_constraintEnd_toEndOf="@+id/rv_recipe_edit_ingredients"
+                    android:gravity="start|top"
+                    android:minLines="3"
+                    android:maxLines="10"
+                    android:hint="Zubereitung" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+            android:text="Speichern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_recipe_edit_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,16 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.adapter.RecipeAdapter
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentRecipeLocaleBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentRecipesLocaleBinding
 
-class RecipeLocaleFragment : Fragment() {
+class RecipesLocaleFragment : Fragment() {
 
-    private lateinit var binding: FragmentRecipeLocaleBinding
+    private lateinit var binding: FragmentRecipesLocaleBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -23,7 +25,7 @@ class RecipeLocaleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecipeLocaleBinding.inflate(layoutInflater)
+        binding = FragmentRecipesLocaleBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -36,17 +38,19 @@ class RecipeLocaleFragment : Fragment() {
 
         val testRecipes = mutableListOf<Recipe>()
         var nummer = 1
-        repeat(20) {
+        val testIngredient =
+        repeat(3) {
             testRecipes.add(
                 Recipe(
                     name = "Testname $nummer",
+                    description = "Wie man das Rezept zubereitet.",
                     tags = listOf(),
                     categories = listOf(),
                     ingredients = listOf(
                         Ingredient(
                             name = "Reis",
                             count = 250,
-                            unit = IngredientsUnit.GRAMM
+                            unit = IngredientsUnit.GRAM
                         )
                     )
                 )
@@ -54,16 +58,22 @@ class RecipeLocaleFragment : Fragment() {
             nummer++
         }
 
-        viewModel.deleteAllRecipesInDatabase()
-        testRecipes.forEach {
-            viewModel.addRecipeToDatabase(it)
-        }
 
-        val adapter = RecipeAdapter(testRecipes)
+//        viewModel.deleteAllRecipesInDatabase()
+//        testRecipes.forEach {
+//            viewModel.addRecipeToDatabase(it)
+//        }
+
+        val adapter = RecipeAdapter(testRecipes, viewModel)
         binding.rvRecipes.adapter = adapter
 
         viewModel.recipes.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            viewModel.wipeAllIngredientItems()
+            findNavController().navigate(R.id.recipeNewFragment)
         }
     }
 }

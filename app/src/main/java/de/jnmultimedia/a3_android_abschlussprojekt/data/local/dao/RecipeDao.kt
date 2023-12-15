@@ -1,4 +1,4 @@
-package de.jnmultimedia.a3_android_abschlussprojekt.data.local
+package de.jnmultimedia.a3_android_abschlussprojekt.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

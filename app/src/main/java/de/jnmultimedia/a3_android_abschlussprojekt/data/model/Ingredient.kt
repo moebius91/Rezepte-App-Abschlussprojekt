@@ -9,6 +9,6 @@ data class Ingredient(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String,
-    val count: Int,
-    val unit: IngredientsUnit
+    val count: Int? = null,
+    val unit: IngredientsUnit? = null
 )

@@ -3,12 +3,16 @@ package de.jnmultimedia.a3_android_abschlussprojekt.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
+import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRecipeBinding
 
 class RecipeAdapter(
-    private var dataset: List<Recipe>
+    private var dataset: List<Recipe>,
+    private val viewModel: MainViewModel
 ): RecyclerView.Adapter<RecipeAdapter.ItemRecipeViewHolder>() {
 
     inner class ItemRecipeViewHolder(val binding: ItemRecipeBinding): RecyclerView.ViewHolder(binding.root)
@@ -26,7 +30,12 @@ class RecipeAdapter(
         val item = dataset[position]
         val binding = holder.binding
 
-        binding.textView.text = item.name
+        binding.tvItemRecipeName.text = item.name
+
+        binding.cvItemRecipe.setOnClickListener {
+            viewModel.saveRecipeItem(item)
+            holder.itemView.findNavController().navigate(R.id.recipeDetailFragment)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

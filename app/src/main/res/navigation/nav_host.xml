@@ -1,27 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_host"
         app:startDestination="@id/recipeLocaleFragment">
 
     <fragment
             android:id="@+id/recipeLocaleFragment"
-            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeLocaleFragment"
-            android:label="RecipeLocaleFragment" />
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipesLocaleFragment"
+            android:label="RecipeLocaleFragment"
+            tools:layout="@layout/fragment_recipes_locale">
+        <action
+                android:id="@+id/action_recipeLocaleFragment_to_recipeDetailFragment"
+                app:destination="@id/recipeDetailFragment" />
+        <action
+                android:id="@+id/action_recipeLocaleFragment_to_recipeNewFragment"
+                app:destination="@id/recipeNewFragment" />
+    </fragment>
     <fragment
             android:id="@+id/categoriesFragment"
             android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.CategoriesFragment"
-            android:label="CategoriesFragment" />
+            android:label="CategoriesFragment"
+            tools:layout="@layout/fragment_categories" />
     <fragment
             android:id="@+id/ingredientsFragment"
             android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.IngredientsFragment"
-            android:label="IngredientsFragment" />
+            android:label="IngredientsFragment"
+            tools:layout="@layout/fragment_ingredients" >
+        <action
+                android:id="@+id/action_ingredientsFragment_to_ingredientNewFragment"
+                app:destination="@id/ingredientNewFragment" />
+    </fragment>
     <fragment
             android:id="@+id/tagsFragment"
             android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.TagsFragment"
-            android:label="TagsFragment" />
+            android:label="TagsFragment"
+            tools:layout="@layout/fragment_tags" />
     <fragment
             android:id="@+id/recipeOnlineFragment"
-            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeOnlineFragment"
-            android:label="RecipeOnlineFragment" />
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipesOnlineFragment"
+            android:label="RecipeOnlineFragment"
+            tools:layout="@layout/fragment_recipes_online" >
+        <action
+                android:id="@+id/action_recipeOnlineFragment_to_recipeDetailFragment"
+                app:destination="@id/recipeDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/recipeDetailFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeDetailFragment"
+            android:label="RecipeDetailFragment"
+            tools:layout="@layout/fragment_recipe_detail" >
+        <action
+                android:id="@+id/action_recipeDetailFragment_to_recipeEditFragment"
+                app:destination="@id/recipeEditFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/recipeEditFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeEditFragment"
+            android:label="RecipeEditFragment"
+            tools:layout="@layout/fragment_recipe_edit" >
+        <action
+                android:id="@+id/action_recipeEditFragment_to_recipeDetailFragment"
+                app:destination="@id/recipeDetailFragment" />
+        <action
+                android:id="@+id/action_recipeEditFragment_to_ingredientsSelectionFragment"
+                app:destination="@id/ingredientsSelectionFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/ingredientsSelectionFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.IngredientsSelectionFragment"
+            android:label="IngredientsSelectionFragment"
+            tools:layout="@layout/fragment_ingredients_selection" >
+        <action
+                android:id="@+id/action_ingredientsSelectionFragment_to_recipeEditFragment"
+                app:destination="@id/recipeEditFragment" />
+        <action
+                android:id="@+id/action_ingredientsSelectionFragment_to_ingredientsSelectionDetailFragment"
+                app:destination="@id/ingredientsSelectionDetailFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/ingredientsSelectionDetailFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.IngredientsSelectionDetailFragment"
+            android:label="IngredientsSelectionDetailFragment"
+            tools:layout="@layout/fragment_ingredients_selection_detail" >
+        <action
+                android:id="@+id/action_ingredientsSelectionDetailFragment_to_ingredientsSelectionFragment"
+                app:destination="@id/ingredientsSelectionFragment" />
+    </fragment>
+    <fragment android:id="@+id/placeholder" >
+        <action
+                android:id="@+id/action_placeholder_to_categoriesFragment"
+                app:destination="@id/categoriesFragment" />
+        <action
+                android:id="@+id/action_placeholder_to_ingredientsFragment"
+                app:destination="@id/ingredientsFragment" />
+        <action
+                android:id="@+id/action_placeholder_to_recipeLocaleFragment"
+                app:destination="@id/recipeLocaleFragment" />
+        <action
+                android:id="@+id/action_placeholder_to_tagsFragment"
+                app:destination="@id/tagsFragment" />
+        <action
+                android:id="@+id/action_placeholder_to_recipeOnlineFragment"
+                app:destination="@id/recipeOnlineFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/recipeNewFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipeNewFragment"
+            android:label="RecipeNewFragment"
+            tools:layout="@layout/fragment_recipe_new" />
+    <fragment
+            android:id="@+id/ingredientNewFragment"
+            android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.IngredientNewFragment"
+            android:label="IngredientNewFragment"
+            tools:layout="@layout/fragment_ingredient_new">
+        <action
+                android:id="@+id/action_ingredientNewFragment_to_ingredientsFragment"
+                app:destination="@id/ingredientsFragment" />
+    </fragment>
 </navigation>

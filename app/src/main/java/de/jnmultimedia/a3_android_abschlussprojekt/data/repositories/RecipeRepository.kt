@@ -22,6 +22,15 @@ class RecipeRepository(
         }
     }
 
+    fun getRecipeById(recipeId: Int): Recipe? {
+        try {
+            return database.recipeDao.getRecipeById(recipeId)
+        } catch (e: Exception) {
+            Log.e(REPO_TAG, e.message.toString())
+            return null
+        }
+    }
+
     suspend fun updateRecipeInDatabase(recipe: Recipe) {
         try {
             database.recipeDao.updateRecipe(recipe)

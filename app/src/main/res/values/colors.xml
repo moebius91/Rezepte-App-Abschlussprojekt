@@ -1,5 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#FFFF8A65</color> <!-- Orange-Ton -->
+    <color name="primaryColorDark">#FFFF5722</color> <!-- Dunkleres Orange -->
+    <color name="primaryColorVariant">#FFFFCCBC</color> <!-- Helleres Orange -->
+    <color name="primaryColorContainer">#FFFFCCBC</color> <!-- Helleres Orange -->
+    <color name="colorOnPrimary">#FFFFFFFF</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+    <color name="colorOnPrimaryContainer">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+
+    <color name="secondaryColor">#FFF5F5F5</color> <!-- Cremiges Weiß -->
+    <color name="secondaryColorVariant">#FFBDBDBD</color> <!-- Helleres Grau -->
+    <color name="colorOnSecondary">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+
+    <color name="tertiaryColor">#FFE0E0E0</color> <!-- Helleres Grau -->
+    <color name="colorOnTertiary">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+
+    <color name="accentColor">#FFFF4081</color> <!-- Pink -->
+    <color name="colorOnAccent">#FFFFFFFF</color> <!-- Weißer Text auf Pink -->
+
+    <color name="colorOnBackground">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+
+    <color name="colorSurface">#FFFFFFFF</color> <!-- Cremiges Weiß -->
+    <color name="colorOnSurface">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
+    <color name="colorOnSurfaceInverse">#FF1E1E1E</color> <!-- Dunkler Grau-Ton für bessere Lesbarkeit -->
 </resources>

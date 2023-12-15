@@ -1,4 +1,4 @@
-package de.jnmultimedia.a3_android_abschlussprojekt.data.local
+package de.jnmultimedia.a3_android_abschlussprojekt.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -17,7 +17,7 @@ interface TagDao {
     suspend fun insertTag(tag: Tag)
 
     // READ
-    @Query("SELECT * FROM tags_table")
+    @Query("SELECT * FROM tags_table ORDER BY name ASC")
     fun getAllTags(): LiveData<List<Tag>>
 
     @Query("SELECT * FROM tags_table WHERE id = :id")
@@ -30,5 +30,8 @@ interface TagDao {
     // DELETE
     @Delete
     suspend fun deleteTag(tag: Tag)
+
+    @Query("DELETE FROM tags_table")
+    suspend fun deleteAllTags()
 
 }

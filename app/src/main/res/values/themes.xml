@@ -2,7 +2,27 @@
     <!-- Base application theme. -->
     <style name="Base.Theme._3AndroidAbschlussprojekt" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorPrimaryVariant">@color/primaryColorVariant</item>
+        <item name="colorPrimaryContainer">@color/primaryColorContainer</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnPrimaryContainer">@color/colorOnPrimary</item>
+
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryColorVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="colorTertiary">@color/tertiaryColor</item>
+        <item name="colorOnTertiary">@color/colorOnTertiary</item>
+
+        <item name="colorAccent">@color/accentColor</item>
+
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorOnSurfaceInverse">@color/colorOnSurfaceInverse</item>
     </style>
 
     <style name="Theme._3AndroidAbschlussprojekt" parent="Base.Theme._3AndroidAbschlussprojekt" />
