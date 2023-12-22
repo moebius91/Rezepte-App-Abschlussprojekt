@@ -47,7 +47,7 @@ class RecipeEditFragment : Fragment() {
         val adapterIngredients = RecipeEditIngredientAdapter( listOf(), viewModel, true, requireContext())
         binding.rvRecipeEditIngredients.adapter = adapterIngredients
 
-        val adapterTags = RecipeDetailTagAdapter( listOf(), viewModel, false, requireContext())
+        val adapterTags = RecipeDetailTagAdapter( listOf(), viewModel, true, requireContext())
         binding.rvRecipeEditTags.adapter = adapterTags
 
         val layoutManager = FlexboxLayoutManager(requireContext()).apply {
@@ -56,7 +56,7 @@ class RecipeEditFragment : Fragment() {
         }
         binding.rvRecipeEditTags.layoutManager = layoutManager
 
-        val adapterCategories = RecipeEditCategoryAdapter( listOf(), viewModel, false, requireContext())
+        val adapterCategories = RecipeEditCategoryAdapter( listOf(), viewModel, true, requireContext())
         binding.rvRecipeEditCategories.adapter = adapterCategories
 
         viewModel.recipeItem.observe(viewLifecycleOwner) { recipe ->
@@ -81,8 +81,10 @@ class RecipeEditFragment : Fragment() {
                 adapterIngredients.submitList(recipe.ingredients!!)
                 if (viewModel.inEditProcess.value != true) {
                     selectedIngredients = recipe.ingredients!!
-                    viewModel.saveSelectedIngredients(selectedIngredients.toMutableList())
-                    adapterIngredients.submitList(recipe.ingredients!!)
+                    viewModel.saveSelectedIngredients(recipe.ingredients!!.toMutableList())
+                    viewModel.selectedIngredients.observe(viewLifecycleOwner) {
+                        adapterIngredients.submitList(it)
+                    }
                 } else {
                     viewModel.selectedIngredients.observe(viewLifecycleOwner) {
                         selectedIngredients = it
@@ -95,8 +97,10 @@ class RecipeEditFragment : Fragment() {
                 adapterTags.submitList(recipe.tags)
                 if (viewModel.inEditProcess.value != true) {
                     selectedTags = recipe.tags
-                    viewModel.saveSelectedTags(selectedTags.toMutableList())
-                    adapterTags.submitList(recipe.tags)
+                    viewModel.saveSelectedTags(recipe.tags.toMutableList())
+                    viewModel.selectedTags.observe(viewLifecycleOwner) {
+                        adapterTags.submitList(it)
+                    }
                 } else {
                     viewModel.selectedTags.observe(viewLifecycleOwner) {
                         selectedTags = it
@@ -109,8 +113,10 @@ class RecipeEditFragment : Fragment() {
                 adapterCategories.submitList(recipe.categories)
                 if (viewModel.inEditProcess.value != true) {
                     selectedCategories = recipe.categories
-                    viewModel.saveSelectedCategories(selectedCategories.toMutableList())
-                    adapterCategories.submitList(recipe.categories)
+                    viewModel.saveSelectedCategories(recipe.categories.toMutableList())
+                    viewModel.selectedCategories.observe(viewLifecycleOwner) {
+                        adapterCategories.submitList(it)
+                    }
                 } else {
                     viewModel.selectedCategories.observe(viewLifecycleOwner) {
                         selectedCategories = it
@@ -124,11 +130,12 @@ class RecipeEditFragment : Fragment() {
             viewModel.inIngredientsSelection()
             viewModel.saveRecipeItem(
                 Recipe(
+                    id = recipeId,
                     name = binding.ettRecipeEditName.text.toString(),
                     description = binding.ettRecipeEditDescription.text.toString(),
-                    ingredients = selectedIngredients,
-                    tags = selectedTags,
-                    categories = selectedCategories
+                    ingredients = viewModel.selectedIngredients.value,
+                    tags = viewModel.selectedTags.value,
+                    categories = viewModel.selectedCategories.value
                 )
             )
             findNavController().navigate(R.id.ingredientsSelectionFragment)
@@ -138,11 +145,12 @@ class RecipeEditFragment : Fragment() {
             viewModel.inIngredientsSelection()
             viewModel.saveRecipeItem(
                 Recipe(
+                    id = recipeId,
                     name = binding.ettRecipeEditName.text.toString(),
                     description = binding.ettRecipeEditDescription.text.toString(),
-                    ingredients = selectedIngredients,
-                    tags = selectedTags,
-                    categories = selectedCategories
+                    ingredients = viewModel.selectedIngredients.value,
+                    tags = viewModel.selectedTags.value,
+                    categories = viewModel.selectedCategories.value
                 )
             )
             findNavController().navigate(R.id.tagsSelectionFragment)
@@ -152,11 +160,12 @@ class RecipeEditFragment : Fragment() {
             viewModel.inIngredientsSelection()
             viewModel.saveRecipeItem(
                 Recipe(
+                    id = recipeId,
                     name = binding.ettRecipeEditName.text.toString(),
                     description = binding.ettRecipeEditDescription.text.toString(),
-                    ingredients = selectedIngredients,
-                    tags = selectedTags,
-                    categories = selectedCategories
+                    ingredients = viewModel.selectedIngredients.value,
+                    tags = viewModel.selectedTags.value,
+                    categories = viewModel.selectedCategories.value
                 )
             )
             findNavController().navigate(R.id.categoriesSelectionFragment)
@@ -167,17 +176,18 @@ class RecipeEditFragment : Fragment() {
             val description = binding.ettRecipeEditDescription.text.toString()
 
             if (name != "" && description != "" && selectedIngredients.isNotEmpty()) {
-                val newRecipe = Recipe(
+                val updatedRecipe = Recipe(
                     id = recipeId,
                     name = name,
                     description = description,
-                    ingredients = selectedIngredients,
-                    tags = selectedTags,
-                    categories = selectedCategories
+                    ingredients = viewModel.selectedIngredients.value,
+                    tags = viewModel.selectedTags.value,
+                    categories = viewModel.selectedCategories.value
                 )
 
-                viewModel.updateRecipeByIdInDatabase(newRecipe)
+                viewModel.updateRecipeByIdInDatabase(updatedRecipe)
                 viewModel.outOfIngredientsSelection()
+                viewModel.saveRecipeItem(updatedRecipe)
                 findNavController().navigateUp()
             } else {
                 /*Debuggingblock*/

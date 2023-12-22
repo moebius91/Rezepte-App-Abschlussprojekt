@@ -31,6 +31,14 @@ class RecipeNewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecipeNewBinding.inflate(layoutInflater)
+        viewModel.inEditProcess.observe(viewLifecycleOwner) {
+            if (!it) {
+                println("Geht er rein, um alle zu wipen?")
+                viewModel.wipeAllItems()
+                viewModel.setInEditProcess()
+            }
+        }
+
         return binding.root
     }
 

@@ -126,6 +126,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun wipeAllItems() {
         _recipeItem = MutableLiveData()
         _selectedIngredients = MutableLiveData<MutableList<Ingredient>>(mutableListOf())
+        _selectedTags.postValue(mutableListOf())
+        _selectedCategories.postValue(mutableListOf())
         _ingredientItem = MutableLiveData()
     }
 
@@ -165,12 +167,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return _selectedIngredients.value?.contains(ingredient) ?: false
     }
 
-    fun removeIngredientFromRecipe(ingredient: Ingredient) {
-        _selectedIngredients.value?.remove(ingredient)
-    }
-
     fun wipeIngredientsItem() {
-        _selectedIngredients = MutableLiveData<MutableList<Ingredient>>()
+        _selectedIngredients.postValue(mutableListOf())
     }
 
     fun deleteIngredientInDatabase(ingredient: Ingredient) {
@@ -203,7 +201,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun deleteTagInRecipe(tag: Tag) {
-        _selectedTags.value?.removeIf { it.id == tag.id }
+        val newList: MutableList<Tag>? = _selectedTags.value
+        newList?.removeIf { it.id == tag.id }
+
+        if (newList != null) {
+            _selectedTags.postValue(newList!!)
+        } else {
+            _selectedTags.postValue(mutableListOf())
+        }
+
+        //_selectedTags.value?.removeIf { it.id == tag.id }
     }
 
     fun addCategoryToDatabase(category: Category) {
