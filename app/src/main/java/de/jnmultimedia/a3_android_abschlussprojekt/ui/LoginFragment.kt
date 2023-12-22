@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.jnmultimedia.a3_android_abschlussprojekt.R
-import de.jnmultimedia.a3_android_abschlussprojekt.adapter.IngredientAdapter
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.UserCredentials
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentIngredientsBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentLoginBinding
 
-class IngredientsFragment: Fragment() {
+class LoginFragment: Fragment() {
 
-    private lateinit var binding: FragmentIngredientsBinding
+    private lateinit var binding: FragmentLoginBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -22,22 +22,24 @@ class IngredientsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentIngredientsBinding.inflate(layoutInflater)
+        binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = IngredientAdapter(requireContext(), listOf(), viewModel)
-        binding.rvIngredient.adapter = adapter
+        binding.btnLogin.setOnClickListener {
+            val username = binding.editTextText.text.toString()
+            val password = binding.editTextTextPassword.text.toString()
 
-        viewModel.ingredients.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-
-        binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.ingredientNewFragment)
+            if (username != "" && password != "") {
+                viewModel.loginToApi(UserCredentials(username, password)) { success ->
+                    if (success) {
+                        findNavController().navigate(R.id.recipeDetailFragment)
+                    }
+                }
+            }
         }
     }
 }

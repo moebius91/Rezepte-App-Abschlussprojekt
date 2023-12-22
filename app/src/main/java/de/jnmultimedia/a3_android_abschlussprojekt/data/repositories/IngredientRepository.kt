@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import de.jnmultimedia.a3_android_abschlussprojekt.data.local.RecipeDatabase
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 
 class IngredientRepository(
     private val database: RecipeDatabase

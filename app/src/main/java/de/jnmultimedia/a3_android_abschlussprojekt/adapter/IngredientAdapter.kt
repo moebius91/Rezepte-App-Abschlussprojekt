@@ -6,18 +6,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
-import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.IngredientViewModel
+import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRvIngredientsBinding
 
 class IngredientAdapter(
     val context: Context,
     private var dataset: List<Ingredient>,
-    private val viewModel: IngredientViewModel
+    private val viewModel: MainViewModel
 ): RecyclerView.Adapter<IngredientAdapter.ItemIngredientViewHolder>() {
 
     inner class ItemIngredientViewHolder(val binding: ItemRvIngredientsBinding): RecyclerView.ViewHolder(binding.root)

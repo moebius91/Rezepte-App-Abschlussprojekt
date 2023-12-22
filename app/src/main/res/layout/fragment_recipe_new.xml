@@ -82,6 +82,51 @@
                     android:maxLines="10"
                     android:hint="Zubereitung" />
 
+            <Button
+                    android:text="Neues Schlagwort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_recipe_new_new_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/ett_recipe_new_description"
+                    app:layout_constraintStart_toStartOf="@+id/ett_recipe_new_name"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:id="@+id/rv_recipe_new_tags"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_recipe_new_new_tag"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_tag"
+                    android:layout_marginTop="16dp" />
+
+            <Button
+                    android:text="Neue Kategorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_recipe_new_new_category"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_recipe_new_tags"
+                    app:layout_constraintStart_toStartOf="@+id/ett_recipe_new_name"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:id="@+id/rv_recipe_new_categories"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_recipe_new_new_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:listitem="@layout/item_category"
+                    android:layout_marginTop="16dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

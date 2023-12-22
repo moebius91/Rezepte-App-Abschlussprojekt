@@ -39,9 +39,31 @@ class RecipeRepository(
         }
     }
 
+    suspend fun updateRecipeByIdInDatabase(recipe: Recipe) {
+        try {
+            val name = recipe.name
+            val description = recipe.description
+            val ingredients = recipe.ingredients
+            val tags = recipe.tags
+            val categories = recipe.categories
+
+            database.recipeDao.updateRecipeById(name, description, ingredients!!, tags!!, categories!!, recipe.id!!)
+        } catch (e: Exception) {
+            Log.e(REPO_TAG, e.message.toString())
+        }
+    }
+
     suspend fun deleteRecipeInDatabase(recipe: Recipe) {
         try {
             database.recipeDao.deleteRecipe(recipe)
+        } catch (e: Exception) {
+            Log.e(REPO_TAG, e.message.toString())
+        }
+    }
+
+    suspend fun deleteRecipeByIdInDatabase(recipeId: Int) {
+        try {
+            database.recipeDao.deleteRecipeById(recipeId)
         } catch (e: Exception) {
             Log.e(REPO_TAG, e.message.toString())
         }

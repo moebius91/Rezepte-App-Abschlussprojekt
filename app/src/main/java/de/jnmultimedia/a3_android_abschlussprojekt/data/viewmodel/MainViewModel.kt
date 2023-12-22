@@ -10,6 +10,8 @@ import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Category
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Token
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.UserCredentials
 import de.jnmultimedia.a3_android_abschlussprojekt.data.remote.RecipesApi
 import de.jnmultimedia.a3_android_abschlussprojekt.data.repositories.ApiRepository
 import de.jnmultimedia.a3_android_abschlussprojekt.data.repositories.CategoryRepository
@@ -32,6 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val ingredients = ingredientRepository.ingredients
     val tags = tagRepository.tags
     val categories = categoryRepository.categories
+    val token = apiRepository.token
 
     private var _recipeItem = MutableLiveData<Recipe>()
     val recipeItem: LiveData<Recipe>
@@ -40,6 +43,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _selectedIngredients = MutableLiveData<MutableList<Ingredient>>(mutableListOf())
     val selectedIngredients: LiveData<MutableList<Ingredient>>
         get() = _selectedIngredients
+
+    private var _selectedTags = MutableLiveData<MutableList<Tag>>(mutableListOf())
+    val selectedTags: LiveData<MutableList<Tag>>
+        get() = _selectedTags
+
+    private var _selectedCategories = MutableLiveData<MutableList<Category>>(mutableListOf())
+    val selectedCategories: LiveData<MutableList<Category>>
+        get() = _selectedCategories
 
     private var _ingredientItem = MutableLiveData<Ingredient>()
     val ingredientItem: LiveData<Ingredient>
@@ -61,6 +72,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val recipeExists: LiveData<Boolean>
         get() = _recipeExists
 
+    private var _inEditProcess = MutableLiveData(false)
+    val inEditProcess: LiveData<Boolean>
+        get() = _inEditProcess
+
     fun addRecipeToDatabase(recipe: Recipe) {
         viewModelScope.launch {
             recipeRepository.saveRecipeInDatabase(recipe)
@@ -80,9 +95,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateRecipeByIdInDatabase(recipe: Recipe) {
+        viewModelScope.launch {
+            recipeRepository.updateRecipeByIdInDatabase(recipe)
+        }
+    }
+
     fun deleteRecipeInDatabase(recipe: Recipe) {
         viewModelScope.launch {
             recipeRepository.deleteRecipeInDatabase(recipe)
+        }
+    }
+
+    fun deleteRecipeByIdInDatabase(recipeId: Int) {
+        viewModelScope.launch {
+            recipeRepository.deleteRecipeByIdInDatabase(recipeId)
         }
     }
 
@@ -117,8 +144,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun saveSelectedIngredients(ingredients: MutableList<Ingredient>) {
+        _selectedIngredients.postValue(ingredients)
+    }
+
     fun addIngredientToRecipe(ingredient: Ingredient) {
         _selectedIngredients.value?.add(ingredient)
+    }
+
+    fun updateIngredientToRecipe(ingredient: Ingredient) {
+        _selectedIngredients.value?.removeIf { it.id == ingredient.id }
+        _selectedIngredients.value?.add(ingredient)
+    }
+
+    fun deleteIngredientInRecipe(ingredient: Ingredient) {
+        _selectedIngredients.value?.removeIf { it.id == ingredient.id }
     }
 
     fun isIngredientInRecipe(ingredient: Ingredient): Boolean {
@@ -133,6 +173,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _selectedIngredients = MutableLiveData<MutableList<Ingredient>>()
     }
 
+    fun deleteIngredientInDatabase(ingredient: Ingredient) {
+        viewModelScope.launch {
+            ingredientRepository.deleteIngredientInDatabase(ingredient)
+        }
+    }
+
     fun inIngredientsSelection() {
         _inIngredientSelection.postValue(true)
     }
@@ -141,8 +187,54 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _inIngredientSelection.postValue(false)
     }
 
+    fun addTagToDatabase(tag: Tag) {
+        viewModelScope.launch {
+            tagRepository.saveTagInDatabase(tag)
+        }
+    }
+
+    fun addTagToRecipe(tag: Tag) {
+        _selectedTags.value?.add(tag)
+    }
+
+    fun updateTagToRecipe(tag: Tag) {
+        _selectedTags.value?.removeIf { it.id == tag.id }
+        _selectedTags.value?.add(tag)
+    }
+
+    fun deleteTagInRecipe(tag: Tag) {
+        _selectedTags.value?.removeIf { it.id == tag.id }
+    }
+
+    fun addCategoryToDatabase(category: Category) {
+        viewModelScope.launch {
+            categoryRepository.saveCategoryInDatabase(category)
+        }
+    }
+
+    fun saveSelectedCategories(categories: MutableList<Category>) {
+        _selectedCategories.postValue(categories)
+    }
+
+    fun addCategoryToRecipe(category: Category) {
+        _selectedCategories.value?.add(category)
+    }
+
+    fun updateCategoryToRecipe(category: Category) {
+        _selectedCategories.value?.removeIf { it.id == category.id }
+        _selectedCategories.value?.add(category)
+    }
+
+    fun deleteCategoryInRecipe(category: Category) {
+        _selectedCategories.value?.removeIf { it.id == category.id }
+    }
+
     fun saveTagItem(tag: Tag) {
         _tagItem.postValue(tag)
+    }
+
+    fun saveSelectedTags(tags: MutableList<Tag>) {
+        _selectedTags.postValue(tags)
     }
 
     fun saveCategoryItem(category: Category) {
@@ -152,6 +244,30 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllRecipesFromApi() {
         viewModelScope.launch {
             apiRepository.getAllRecipes()
+        }
+    }
+
+    fun setInEditProcess() {
+        _inEditProcess.postValue(true)
+    }
+
+    fun disableInEditProcess() {
+        _inEditProcess.postValue(false)
+    }
+
+
+    // API Abschnitt
+
+    fun loginToApi(userCredentials: UserCredentials, callback: (Boolean) -> Unit) {
+        viewModelScope.launch{
+            val success = apiRepository.loginToApi(userCredentials)
+            callback(success)
+        }
+    }
+
+    fun pushRecipeToApi(recipe: Recipe, token: Token) {
+        viewModelScope.launch {
+            apiRepository.createRecipe(recipe, token)
         }
     }
 

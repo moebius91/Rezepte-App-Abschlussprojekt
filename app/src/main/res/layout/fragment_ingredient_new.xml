@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
 
     <TextView
-            android:text="Neues Zutat:"
+            android:text="Neue Zutat:"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_ingredient_new_title"

@@ -13,56 +13,49 @@ import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemIngredientBinding
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRecipeBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemTagBinding
 
-class IngredientsSelectionAdapter(
-    private var dataset: List<Ingredient>,
+class TagsSelectionAdapter(
+    private var dataset: List<Tag>,
     private val viewModel: MainViewModel
-): RecyclerView.Adapter<IngredientsSelectionAdapter.ItemIngredientViewHolder>() {
+): RecyclerView.Adapter<TagsSelectionAdapter.ItemTagViewHolder>() {
 
-    inner class ItemIngredientViewHolder(val binding: ItemIngredientBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ItemTagViewHolder(val binding: ItemTagBinding): RecyclerView.ViewHolder(binding.root) {
         var ingredientActive = false
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemIngredientViewHolder {
-        val binding = ItemIngredientBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemIngredientViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTagViewHolder {
+        val binding = ItemTagBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemTagViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return dataset.size
     }
 
-    override fun onBindViewHolder(holder: ItemIngredientViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemTagViewHolder, position: Int) {
         val item = dataset[position]
         val binding = holder.binding
 
-        binding.tvIngredientCount.visibility = View.GONE
-        binding.tvIngredientUnit.visibility = View.GONE
-
-        binding.cvItemIngredient.visibility = if (holder.ingredientActive) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
-
-        binding.cvItemIngredient.setOnClickListener {
+        binding.cvItemTag.setOnClickListener {
             if (holder.ingredientActive) {
                 holder.ingredientActive = false
             } else {
                 holder.ingredientActive = true
             }
-            viewModel.addIngredientToRecipe(item)
+            viewModel.addTagToRecipe(item)
             viewModel.outOfIngredientsSelection()
             holder.itemView.findNavController().navigateUp()
         }
-        binding.tvIngredientName.text = item.name
+
+        binding.tvItemTagName.text = item.name
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(list: List<Ingredient>) {
+    fun submitList(list: List<Tag>) {
         dataset = list
         notifyDataSetChanged()
     }

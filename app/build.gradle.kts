@@ -70,4 +70,7 @@ dependencies {
     // Gson-Bibliothek
     implementation ("com.google.code.gson:gson:2.8.9")
 
+    // Flexboxen
+    // https://mvnrepository.com/artifact/com.google.android.flexbox/flexbox
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }

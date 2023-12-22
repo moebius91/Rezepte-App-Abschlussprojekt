@@ -1,11 +1,16 @@
 package de.jnmultimedia.a3_android_abschlussprojekt.adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
@@ -18,7 +23,8 @@ import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRecipeBinding
 class RecipeEditIngredientAdapter(
     private var dataset: List<Ingredient>,
     private val viewModel: MainViewModel,
-    private val clickableItems: Boolean
+    private val clickableItems: Boolean,
+    private val context: Context
 ): RecyclerView.Adapter<RecipeEditIngredientAdapter.ItemIngredientViewHolder>() {
 
     inner class ItemIngredientViewHolder(val binding: ItemIngredientBinding): RecyclerView.ViewHolder(binding.root)
@@ -64,6 +70,22 @@ class RecipeEditIngredientAdapter(
                 viewModel.saveIngredientItem(item)
                 holder.itemView.findNavController()
                     .navigate(R.id.ingredientsSelectionDetailFragment)
+            }
+
+            binding.cvItemIngredient.setOnLongClickListener {
+                AlertDialog.Builder(context)
+                    .setTitle("Bestätigung")
+                    .setMessage("Zutat wirklich löschen?")
+                    .setPositiveButton("Löschen") { dialog, which ->
+                        viewModel.deleteIngredientInRecipe(item)
+                        notifyItemRemoved(item.id!!)
+                        Toast
+                            .makeText(context, "Zutat gelöscht!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    .setNegativeButton("Abbrechen", null)
+                    .show()
+                true
             }
         }
     }

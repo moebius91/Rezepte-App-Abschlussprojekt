@@ -10,59 +10,53 @@ import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.jnmultimedia.a3_android_abschlussprojekt.R
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Category
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemIngredientBinding
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRecipeBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemCategoryBinding
 
-class IngredientsSelectionAdapter(
-    private var dataset: List<Ingredient>,
+class CategoriesSelectionAdapter(
+    private var dataset: List<Category>,
     private val viewModel: MainViewModel
-): RecyclerView.Adapter<IngredientsSelectionAdapter.ItemIngredientViewHolder>() {
+): RecyclerView.Adapter<CategoriesSelectionAdapter.ItemCategoryViewHolder>() {
 
-    inner class ItemIngredientViewHolder(val binding: ItemIngredientBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ItemCategoryViewHolder(val binding: ItemCategoryBinding): RecyclerView.ViewHolder(binding.root) {
         var ingredientActive = false
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemIngredientViewHolder {
-        val binding = ItemIngredientBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemIngredientViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCategoryViewHolder {
+        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemCategoryViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return dataset.size
     }
 
-    override fun onBindViewHolder(holder: ItemIngredientViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemCategoryViewHolder, position: Int) {
         val item = dataset[position]
         val binding = holder.binding
 
-        binding.tvIngredientCount.visibility = View.GONE
-        binding.tvIngredientUnit.visibility = View.GONE
-
-        binding.cvItemIngredient.visibility = if (holder.ingredientActive) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
-
-        binding.cvItemIngredient.setOnClickListener {
+        binding.cvItemCategory.setOnClickListener {
             if (holder.ingredientActive) {
                 holder.ingredientActive = false
             } else {
                 holder.ingredientActive = true
             }
-            viewModel.addIngredientToRecipe(item)
+            viewModel.addCategoryToRecipe(item)
             viewModel.outOfIngredientsSelection()
             holder.itemView.findNavController().navigateUp()
         }
-        binding.tvIngredientName.text = item.name
+
+
+        binding.tvItemCategoryName.text = item.name
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun submitList(list: List<Ingredient>) {
+    fun submitList(list: List<Category>) {
         dataset = list
         notifyDataSetChanged()
     }

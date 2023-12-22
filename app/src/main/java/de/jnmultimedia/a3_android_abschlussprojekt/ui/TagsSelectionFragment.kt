@@ -9,14 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.jnmultimedia.a3_android_abschlussprojekt.R
-import de.jnmultimedia.a3_android_abschlussprojekt.adapter.IngredientsSelectionAdapter
+import de.jnmultimedia.a3_android_abschlussprojekt.adapter.TagsSelectionAdapter
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentIngredientsSelectionBinding
+import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentTagsSelectionBinding
 
-class IngredientsSelectionFragment: Fragment() {
+class TagsSelectionFragment: Fragment() {
 
-    private lateinit var binding: FragmentIngredientsSelectionBinding
+    private lateinit var binding: FragmentTagsSelectionBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -24,38 +25,38 @@ class IngredientsSelectionFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentIngredientsSelectionBinding.inflate(layoutInflater)
+        binding = FragmentTagsSelectionBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = IngredientsSelectionAdapter(listOf(), viewModel)
-        binding.rvIngredientsSelection.adapter = adapter
+        val adapter = TagsSelectionAdapter(listOf(), viewModel)
+        binding.rvTagsSelection.adapter = adapter
 
-        viewModel.ingredients.observe(viewLifecycleOwner) { ingredientsMainList ->
-            val newList = mutableListOf<Ingredient>()
+        viewModel.tags.observe(viewLifecycleOwner) { tagsMainList ->
+            val newList = mutableListOf<Tag>()
 
-            ingredientsMainList.forEach {
+            tagsMainList.forEach {
                 newList.add(it)
             }
 
-            viewModel.selectedIngredients.observe(viewLifecycleOwner) {
-                it.forEach { ingredient ->
-                    newList.removeAll { it.name == ingredient.name }
+            viewModel.selectedTags.observe(viewLifecycleOwner) {
+                it.forEach { tag ->
+                    newList.removeAll { it.name == tag.name }
                 }
             }
 
             adapter.submitList(newList)
         }
 
-        binding.btnIngrSelectionNewIngredient.setOnClickListener {
-            val name = binding.ettIngrSelectionNewIngredientName.text.toString()
+        binding.btnTagSelectionNewTag.setOnClickListener {
+            val name = binding.ettTagSelectionNewTagName.text.toString()
 
             if (name != "") {
-                viewModel.addIngredientToDatabase(Ingredient(name = name))
-                binding.ettIngrSelectionNewIngredientName.text.clear()
+                viewModel.addTagToDatabase(Tag(name = name))
+                binding.ettTagSelectionNewTagName.text.clear()
             }
         }
 

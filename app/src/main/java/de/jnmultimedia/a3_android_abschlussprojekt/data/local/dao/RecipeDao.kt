@@ -7,7 +7,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Category
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 
 @Dao
 interface RecipeDao {
@@ -27,9 +30,15 @@ interface RecipeDao {
     @Update
     suspend fun updateRecipe(recipe: Recipe)
 
+    @Query("UPDATE recipe_table SET name = :name, description = :description, ingredients = :ingredients, tags = :tags, categories = :categories WHERE id = :recipeId")
+    suspend fun updateRecipeById(name: String, description: String, ingredients: List<Ingredient>, tags: List<Tag>, categories: List<Category>, recipeId: Int)
+
     // DELETE
     @Delete
     suspend fun deleteRecipe(recipe: Recipe)
+
+    @Query("DELETE FROM recipe_table WHERE id = :recipeId")
+    suspend fun deleteRecipeById(recipeId: Int)
 
     @Query("DELETE FROM recipe_table")
     suspend fun deleteAllRecipes()

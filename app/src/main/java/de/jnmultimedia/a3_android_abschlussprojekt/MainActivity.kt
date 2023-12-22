@@ -39,10 +39,6 @@ class MainActivity : AppCompatActivity() {
 
                 if (navController.currentDestination?.id != R.id.recipeLocaleFragment) {
                     navController.navigateUp()
-                } else if (navController.currentDestination?.id == R.id.recipeDetailFragment) {
-                    navController.navigate(R.id.recipeLocaleFragment)
-                } else if (navController.currentDestination?.id == R.id.recipeEditFragment) {
-                    navController.navigate(R.id.recipeDetailFragment)
                 } else {
                     finish()
                 }

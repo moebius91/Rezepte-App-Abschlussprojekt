@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content">
 
             <TextView
-                    android:text="Neues Rezept:"
+                    android:text="Bearbeite Rezept:"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_recipe_edit_title"
@@ -30,7 +30,8 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp" />
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintHorizontal_bias="0.0" />
 
             <EditText
                     android:layout_width="0dp"
@@ -81,6 +82,49 @@
                     android:minLines="3"
                     android:maxLines="10"
                     android:hint="Zubereitung" />
+
+            <Button
+                    android:text="Neues Schlagwort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_recipe_edit_new_tag"
+                    app:layout_constraintTop_toBottomOf="@+id/ett_recipe_edit_description"
+                    app:layout_constraintStart_toStartOf="@+id/ett_recipe_edit_name"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/rv_recipe_edit_tags"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_recipe_edit_new_tag"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_ingredient" />
+
+            <Button
+                    android:text="Neue Kategorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_recipe_edit_new_category"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_recipe_edit_tags"
+                    app:layout_constraintStart_toStartOf="@+id/ett_recipe_edit_name"
+                    android:layout_marginTop="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/rv_recipe_edit_categories"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_recipe_edit_new_category"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_ingredient" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
