@@ -73,9 +73,6 @@ class RecipeEditFragment : Fragment() {
             viewModel.inEditProcess.observe(viewLifecycleOwner) {
                 if (!it) {
                     viewModel.wipeAllIngredientItems()
-                    recipe.ingredients?.forEach { viewModel.addIngredientToRecipe(it) }
-                    recipe.tags?.forEach { viewModel.addTagToRecipe(it) }
-                    recipe.categories?.forEach { viewModel.addCategoryToRecipe(it) }
                     viewModel.setInEditProcess()
                 }
             }
