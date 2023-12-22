@@ -71,16 +71,17 @@
 
             <EditText
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:inputType="text"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:id="@+id/ett_recipe_edit_description"
                     app:layout_constraintTop_toBottomOf="@+id/rv_recipe_edit_ingredients"
                     app:layout_constraintStart_toStartOf="@+id/rv_recipe_edit_ingredients"
                     app:layout_constraintEnd_toEndOf="@+id/rv_recipe_edit_ingredients"
                     android:gravity="start|top"
-                    android:minLines="3"
                     android:maxLines="10"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
                     android:hint="Zubereitung" />
 
             <Button
