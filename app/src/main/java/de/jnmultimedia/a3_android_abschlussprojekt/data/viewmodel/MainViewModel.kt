@@ -36,6 +36,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val categories = categoryRepository.categories
     val token = apiRepository.token
 
+    val ingredientsOnline = apiRepository.ingredientsOnline
+
     private var _recipeItem = MutableLiveData<Recipe>()
     val recipeItem: LiveData<Recipe>
         get() = _recipeItem

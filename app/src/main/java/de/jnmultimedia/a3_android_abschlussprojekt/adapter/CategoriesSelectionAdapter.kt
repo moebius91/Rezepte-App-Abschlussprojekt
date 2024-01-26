@@ -1,21 +1,12 @@
 package de.jnmultimedia.a3_android_abschlussprojekt.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Category
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemIngredientBinding
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemCategoryBinding
 
 class CategoriesSelectionAdapter(

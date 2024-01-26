@@ -7,6 +7,7 @@ import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.RecipeCreationRequest
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.RecipeOnline
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Token
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.UserCredentials
 import de.jnmultimedia.a3_android_abschlussprojekt.data.remote.RecipesApi
@@ -38,16 +39,43 @@ class ApiRepository(
             )
 
             val ingredients = recipe.ingredients
-            val ingredientIds = mutableListOf<Int>()
+            val ingredientsNew = mutableListOf<Ingredient>()
             getAllIngredients()
 
             ingredients?.forEach {  ingredient ->
-                val newIngredient = ingredientsOnline.value?.indexOfFirst { it.name == ingredient.name }
+                val newIngredientIndex = ingredientsOnline.value?.indexOfFirst { it.name == ingredient.name }
 
-                if (newIngredient != null) {
-                    ingredientIds.add(newIngredient)
+                if (newIngredientIndex != null) {
+                    val newIngredient = ingredientsOnline.value?.get(newIngredientIndex)
+                    println("Zutat wurde online gefunden")
+
+                    if (newIngredient != null) {
+                        ingredientsNew.add(newIngredient)
+                    }
                 } else {
+                    println("Zutat wird online eingetragen")
+                    // TODO: Eigene createTag Funktion draus machen.
+                    val newIngredientResponse = apiService.retrofitService.createIngredient(
+                        authHeader = bearer,
+                        Ingredient(
+                            name = ingredient.name,
+                        )
+                    )
 
+                    val newIngredientFromResponse = newIngredientResponse.body()
+
+                    if (newIngredientFromResponse != null) {
+                        val newIngredient = Ingredient(
+                            newIngredientFromResponse.id,
+                            newIngredientFromResponse.name,
+                            ingredient.count,
+                            ingredient.unit
+                        )
+
+                        if (newIngredient.id != null) {
+                            ingredientsNew.add(newIngredient)
+                        }
+                    }
                 }
             }
 
@@ -57,10 +85,10 @@ class ApiRepository(
                     recipeOnline,
                     listOf(),
                     listOf(),
-                    ingredientIds
+                    listOf(),
+                    //ingredientsNew
                 )
             )
-            println(bearer)
         } catch (e: Exception) {
             Log.e(REPO_TAG, e.message.toString())
         }

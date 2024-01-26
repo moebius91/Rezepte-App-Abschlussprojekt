@@ -12,7 +12,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/cv_item_category"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -4,5 +4,5 @@ data class RecipeCreationRequest(
     val recipe: RecipeOnline,
     val categoryIds: List<Int>,
     val tagIds: List<Int>,
-    val ingredientIds: List<Int>
+    val ingredients: List<Ingredient>
 )

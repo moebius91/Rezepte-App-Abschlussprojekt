@@ -3,22 +3,17 @@ package de.jnmultimedia.a3_android_abschlussprojekt.adapter
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemIngredientBinding
-import de.jnmultimedia.a3_android_abschlussprojekt.databinding.ItemRecipeBinding
 
 class RecipeEditIngredientAdapter(
     private var dataset: List<Ingredient>,
@@ -57,11 +52,11 @@ class RecipeEditIngredientAdapter(
         binding.tvIngredientName.text = item.name
         binding.tvIngredientCount.text = if (item.count != null) item.count.toString() else ""
         binding.tvIngredientUnit.text = when (item.unit?.name) {
-            IngredientsUnit.GRAM.name -> "g"
-            IngredientsUnit.KILOGRAM.name -> "kg"
-            IngredientsUnit.LITER.name -> "L"
-            IngredientsUnit.MILLILITER.name -> "mL"
-            IngredientsUnit.PIECE.name -> "Stück"
+            IngredientUnit.GRAM.name -> "g"
+            IngredientUnit.KILOGRAM.name -> "kg"
+            IngredientUnit.LITER.name -> "L"
+            IngredientUnit.MILLILITER.name -> "mL"
+            IngredientUnit.PIECE.name -> "Stück"
             else -> ""
         }
 

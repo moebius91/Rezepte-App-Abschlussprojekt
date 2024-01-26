@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentIngredientsSelectionDetailBinding
 
@@ -43,11 +43,11 @@ class IngredientsSelectionDetailFragment: Fragment() {
             }
 
             selection = when(it.unit?.name) {
-                IngredientsUnit.GRAM.name -> 0
-                IngredientsUnit.KILOGRAM.name -> 1
-                IngredientsUnit.LITER.name -> 2
-                IngredientsUnit.MILLILITER.name -> 3
-                IngredientsUnit.PIECE.name -> 4
+                IngredientUnit.GRAM.name -> 0
+                IngredientUnit.KILOGRAM.name -> 1
+                IngredientUnit.LITER.name -> 2
+                IngredientUnit.MILLILITER.name -> 3
+                IngredientUnit.PIECE.name -> 4
                 else  -> 0
             }
 
@@ -64,11 +64,11 @@ class IngredientsSelectionDetailFragment: Fragment() {
                 val unitString = binding.spinnerIngrSelectionDetailUnit.selectedItem
 
                 val unit = when(unitString) {
-                    "g" -> IngredientsUnit.GRAM
-                    "kg" -> IngredientsUnit.KILOGRAM
-                    "mL" -> IngredientsUnit.MILLILITER
-                    "L" -> IngredientsUnit.LITER
-                    else -> IngredientsUnit.PIECE
+                    "g" -> IngredientUnit.GRAM
+                    "kg" -> IngredientUnit.KILOGRAM
+                    "mL" -> IngredientUnit.MILLILITER
+                    "L" -> IngredientUnit.LITER
+                    else -> IngredientUnit.PIECE
                 }
 
                 val updatedIngredient = Ingredient(

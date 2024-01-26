@@ -1,11 +1,11 @@
 package de.jnmultimedia.a3_android_abschlussprojekt.data.remote
 
-import androidx.room.Delete
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.RecipeCreationRequest
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Tag
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Token
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.UserCredentials
 import retrofit2.Response
@@ -17,7 +17,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Part
 import retrofit2.http.Path
 
 const val BASE_URL = "http://10.0.2.2:8080/"
@@ -39,6 +38,9 @@ interface RecipesApiService {
     // CREATE
     @POST("recipe")
     suspend fun createRecipe(@Header("Authorization") authHeader: String, @Body recipeCreationRequest: RecipeCreationRequest): Response<Recipe>
+
+    @POST("ingredient")
+    suspend fun createIngredient(@Header("Authorization") authHeader: String, @Body ingredient: Ingredient): Response<Ingredient>
 
     // READ
     @GET("recipes")

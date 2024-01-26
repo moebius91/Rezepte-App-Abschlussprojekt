@@ -39,17 +39,17 @@ class IngredientAdapter(
 
             if (true)
 
-            AlertDialog.Builder(context)
-                .setTitle("Bestätigung")
-                .setMessage("Zutat wirklich löschen?")
-                .setPositiveButton("Löschen") { dialog, which ->
-                    viewModel.deleteIngredientInDatabase(item)
-                    Toast
-                        .makeText(context, "Zutat gelöscht!", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                .setNegativeButton("Abbrechen", null)
-                .show()
+                AlertDialog.Builder(context)
+                    .setTitle("Bestätigung")
+                    .setMessage("Zutat wirklich löschen?")
+                    .setPositiveButton("Löschen") { dialog, which ->
+                        viewModel.deleteIngredientInDatabase(item)
+                        Toast
+                            .makeText(context, "Zutat gelöscht!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    .setNegativeButton("Abbrechen", null)
+                    .show()
             true
         }
     }

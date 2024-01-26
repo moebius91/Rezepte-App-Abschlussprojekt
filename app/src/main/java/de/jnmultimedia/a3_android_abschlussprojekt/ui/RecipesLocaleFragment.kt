@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import de.jnmultimedia.a3_android_abschlussprojekt.R
 import de.jnmultimedia.a3_android_abschlussprojekt.adapter.RecipeAdapter
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
-import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientsUnit
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.IngredientUnit
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.viewmodel.MainViewModel
 import de.jnmultimedia.a3_android_abschlussprojekt.databinding.FragmentRecipesLocaleBinding
@@ -50,7 +50,7 @@ class RecipesLocaleFragment : Fragment() {
                         Ingredient(
                             name = "Reis",
                             count = 250,
-                            unit = IngredientsUnit.GRAM
+                            unit = IngredientUnit.GRAM
                         )
                     )
                 )
