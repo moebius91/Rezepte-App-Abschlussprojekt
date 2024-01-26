@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.recipeLocaleFragment -> binding.bottomNav.visibility = View.VISIBLE
+                R.id.recipesLocaleFragment -> binding.bottomNav.visibility = View.VISIBLE
                 R.id.ingredientsFragment -> binding.bottomNav.visibility = View.VISIBLE
                 R.id.tagsFragment -> binding.bottomNav.visibility = View.VISIBLE
                 R.id.categoriesFragment -> binding.bottomNav.visibility = View.VISIBLE
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 // Wir initialisieren eine Variable mit dem NavController
                 val navController: NavController = binding.fragmentContainerView.findNavController()
 
-                if (navController.currentDestination?.id != R.id.recipeLocaleFragment) {
+                if (navController.currentDestination?.id != R.id.recipesLocaleFragment) {
                     navController.navigateUp()
                 } else {
                     finish()

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -175,28 +176,30 @@ class RecipeEditFragment : Fragment() {
             val name = binding.ettRecipeEditName.text.toString()
             val description = binding.ettRecipeEditDescription.text.toString()
 
-            if (name != "" && description != "" && selectedIngredients.isNotEmpty()) {
-                val updatedRecipe = Recipe(
-                    id = recipeId,
-                    name = name,
-                    description = description,
-                    ingredients = viewModel.selectedIngredients.value,
-                    tags = viewModel.selectedTags.value,
-                    categories = viewModel.selectedCategories.value
-                )
+            if (name != "" && description != "") {
+                if (selectedIngredients.isNotEmpty()) {
+                    val updatedRecipe = Recipe(
+                        id = recipeId,
+                        name = name,
+                        description = description,
+                        ingredients = viewModel.selectedIngredients.value,
+                        tags = viewModel.selectedTags.value,
+                        categories = viewModel.selectedCategories.value
+                    )
 
-                viewModel.updateRecipeByIdInDatabase(updatedRecipe)
-                viewModel.outOfIngredientsSelection()
-                viewModel.saveRecipeItem(updatedRecipe)
-                findNavController().navigateUp()
+                    viewModel.updateRecipeByIdInDatabase(updatedRecipe)
+                    viewModel.outOfIngredientsSelection()
+                    viewModel.saveRecipeItem(updatedRecipe)
+                    findNavController().navigateUp()
+                } else {
+                    Toast
+                        .makeText(context, "Keine Zutaten hinzugefügt!", Toast.LENGTH_SHORT)
+                        .show()
+                }
             } else {
-                /*Debuggingblock*/
-                println("Fehler:")
-                println(name)
-                println(description)
-                println(selectedIngredients)
-                println(selectedTags)
-                println(selectedCategories)
+                Toast
+                    .makeText(context, "Titel und Beschreibung dürfen nicht leer sein!", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 

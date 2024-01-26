@@ -2,6 +2,7 @@ package de.jnmultimedia.a3_android_abschlussprojekt.data.remote
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Category
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Ingredient
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.Recipe
 import de.jnmultimedia.a3_android_abschlussprojekt.data.model.RecipeCreationRequest
@@ -42,14 +43,27 @@ interface RecipesApiService {
     @POST("ingredient")
     suspend fun createIngredient(@Header("Authorization") authHeader: String, @Body ingredient: Ingredient): Response<Ingredient>
 
+    @POST("tag")
+    suspend fun createTag(@Header("Authorization") authHeader: String, @Body tag: Tag): Response<Tag>
+
+    @POST("category")
+    suspend fun createCategory(@Header("Authorization") authHeader: String, @Body category: Category): Response<Category>
+
     // READ
     @GET("recipes")
     suspend fun getAllRecipes(): List<Recipe>
-    @GET("ingredients")
-    suspend fun getAllIngredients(): List<Ingredient>
 
     @GET("recipe/{recipeId}")
     suspend fun getRecipeById(@Path("recipeId") recipeId: Int): Recipe
+
+    @GET("ingredients")
+    suspend fun getAllIngredients(): List<Ingredient>
+
+    @GET("tags")
+    suspend fun getAllTags(): List<Tag>
+
+    @GET("categories")
+    suspend fun getAllCategories(): List<Category>
 
     // UPDATE
     @PUT("recipe/{recipeId}")

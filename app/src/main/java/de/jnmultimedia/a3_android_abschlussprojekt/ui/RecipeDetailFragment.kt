@@ -39,7 +39,7 @@ class RecipeDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.recipeItem.observe(viewLifecycleOwner) {
+        viewModel.recipeItem.observe(viewLifecycleOwner) { it ->
             binding.tvRecipeDetailName.text = it.name
             binding.tvRecipeDetailDescription.text = it.description
 
@@ -62,7 +62,7 @@ class RecipeDetailFragment: Fragment() {
                 viewModel.token.observe(viewLifecycleOwner) { token ->
                     if (token != null) {
                         viewModel.pushRecipeToApi(it, token)
-                        findNavController().navigate(R.id.recipeLocaleFragment)
+                        findNavController().navigate(R.id.recipesLocaleFragment)
                     } else {
                         findNavController().navigate(R.id.loginFragment)
                     }
@@ -80,7 +80,7 @@ class RecipeDetailFragment: Fragment() {
                     .setMessage("Rezept wirklich löschen?")
                     .setPositiveButton("Löschen") { dialog, which ->
                         viewModel.deleteRecipeInDatabase(viewModel.recipeItem.value!!)
-                        findNavController().navigate(R.id.recipeLocaleFragment)
+                        findNavController().navigate(R.id.recipesLocaleFragment)
                         Toast
                             .makeText(context, "Rezept gelöscht!", Toast.LENGTH_SHORT)
                             .show()
@@ -94,7 +94,7 @@ class RecipeDetailFragment: Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 // Wir initialisieren eine Variable mit dem NavController
-                findNavController().navigate(R.id.recipeLocaleFragment)
+                findNavController().navigate(R.id.recipesLocaleFragment)
             }
         })
     }

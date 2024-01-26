@@ -5,7 +5,7 @@
             android:title="Rezepte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/recipeLocaleFragment"
+            android:id="@+id/recipesLocaleFragment"
             android:icon="@drawable/icon_recipes" />
 
     <item

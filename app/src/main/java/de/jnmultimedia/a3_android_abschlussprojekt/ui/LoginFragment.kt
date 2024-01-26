@@ -36,7 +36,7 @@ class LoginFragment: Fragment() {
             if (username != "" && password != "") {
                 viewModel.loginToApi(UserCredentials(username, password)) { success ->
                     if (success) {
-                        findNavController().navigate(R.id.recipeDetailFragment)
+                        findNavController().navigate(R.id.recipesLocaleFragment)
                     }
                 }
             }

@@ -3,18 +3,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_host"
-        app:startDestination="@id/recipeLocaleFragment">
+        app:startDestination="@id/recipesLocaleFragment">
 
     <fragment
-            android:id="@+id/recipeLocaleFragment"
+            android:id="@+id/recipesLocaleFragment"
             android:name="de.jnmultimedia.a3_android_abschlussprojekt.ui.RecipesLocaleFragment"
-            android:label="RecipeLocaleFragment"
+            android:label="RecipesLocaleFragment"
             tools:layout="@layout/fragment_recipes_locale">
         <action
-                android:id="@+id/action_recipeLocaleFragment_to_recipeDetailFragment"
+                android:id="@+id/action_recipesLocaleFragment_to_recipeDetailFragment"
                 app:destination="@id/recipeDetailFragment" />
         <action
-                android:id="@+id/action_recipeLocaleFragment_to_recipeNewFragment"
+                android:id="@+id/action_recipesLocaleFragment_to_recipeNewFragment"
                 app:destination="@id/recipeNewFragment" />
     </fragment>
     <fragment
@@ -112,8 +112,8 @@
                 android:id="@+id/action_placeholder_to_ingredientsFragment"
                 app:destination="@id/ingredientsFragment" />
         <action
-                android:id="@+id/action_placeholder_to_recipeLocaleFragment"
-                app:destination="@id/recipeLocaleFragment" />
+                android:id="@+id/action_placeholder_to_recipesLocaleFragment"
+                app:destination="@id/recipesLocaleFragment" />
         <action
                 android:id="@+id/action_placeholder_to_tagsFragment"
                 app:destination="@id/tagsFragment" />
