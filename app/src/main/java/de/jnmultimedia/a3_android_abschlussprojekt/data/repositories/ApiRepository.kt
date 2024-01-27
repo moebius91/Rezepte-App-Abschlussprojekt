@@ -59,10 +59,17 @@ class ApiRepository(
                 val newIngredientIndex = ingredientsOnline.value?.indexOfFirst { it.name == ingredient.name }
 
                 if (newIngredientIndex != -1 && newIngredientIndex != null) {
-                    val newIngredient = ingredientsOnline.value?.get(newIngredientIndex)
+                    val ingredientOnline = ingredientsOnline.value?.get(newIngredientIndex)
                     println("Zutat wurde online gefunden")
 
-                    if (newIngredient != null) {
+                    val newIngredient = Ingredient(
+                        id = ingredientOnline?.id,
+                        name = ingredient.name,
+                        count = ingredient.count,
+                        unit = ingredient.unit
+                    )
+
+                    if (ingredientOnline != null) {
                         ingredientsNew.add(newIngredient)
                     }
                 } else {
@@ -87,6 +94,8 @@ class ApiRepository(
                             ingredient.count,
                             ingredient.unit
                         )
+
+                        println(newIngredient)
 
                         if (newIngredient.id != null) {
                             ingredientsNew.add(newIngredient)
