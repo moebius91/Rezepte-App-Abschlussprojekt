@@ -10,7 +10,7 @@ class IngredientRepository(
     private val database: RecipeDatabase
 ) {
 
-    private val REPO_TAG = "REPO"
+    private val REPO_TAG = "IngredientRepository"
 
     val ingredients: LiveData<List<Ingredient>> = database.ingredientDao.getAllIngredients()
 

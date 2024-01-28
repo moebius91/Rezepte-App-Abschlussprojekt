@@ -9,7 +9,7 @@ class TagRepository(
     private val database: RecipeDatabase
 ) {
 
-    private val REPO_TAG = "REPO"
+    private val REPO_TAG = "TagRepository"
 
     val tags: LiveData<List<Tag>> = database.tagDao.getAllTags()
 

@@ -9,7 +9,7 @@ class CategoryRepository(
     private val database: RecipeDatabase
 ) {
 
-    private val REPO_TAG = "REPO"
+    private val REPO_TAG = "CategoryRepository"
 
     val categories: LiveData<List<Category>> = database.categoryDao.getAllCategories()
 
