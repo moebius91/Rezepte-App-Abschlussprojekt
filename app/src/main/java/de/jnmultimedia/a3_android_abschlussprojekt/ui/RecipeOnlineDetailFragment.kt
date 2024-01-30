@@ -58,12 +58,13 @@ class RecipeOnlineDetailFragment: Fragment() {
 
             binding.cvBtnRecipeDetailDownload.setOnClickListener { view ->
                 viewModel.token.observe(viewLifecycleOwner) { token ->
-                    if (token != null) {
+                    // TODO: Abfrage, ob das entsprechende Rezept bereits in der eigenen Datenbank vorhanden ist
+                    //if (token != null) {
                         viewModel.addRecipeToDatabase(it)
                         findNavController().navigate(R.id.recipesLocaleFragment)
-                    } else {
-                        findNavController().navigate(R.id.loginFragment)
-                    }
+                    //} else {
+                    //    findNavController().navigate(R.id.loginFragment)
+                    //}
                 }
             }
         }
